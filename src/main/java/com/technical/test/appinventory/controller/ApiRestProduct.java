@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/product-information")
+@RequestMapping("/api/product-information")
 @RequiredArgsConstructor
 public class ApiRestProduct {
 
