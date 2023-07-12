@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-1-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      pod: micro-1-pod
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: invetory
+        pod: micro-1-pod
+        app.bancolombia.com.co/project: invetory
+        version: version.trunk.20220831.1
+    spec:
+      securityContext:
+        fsGroup: 10101
+        runAsUser: 100
+        runAsGroup: 10101
+      containers:
+        - name: micro-1-container
+          securityContext:
+            runAsUser: 100
+            runAsGroup: 10101
+            allowPrivilegeEscalation: false
+          image: edisonprogramador/inventory:v1
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "300m"
+            limits:
+              memory: "1000Mi"
+              cpu: "600m"
+          ports:
+            - containerPort: 8080
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              run: micro-1-pod

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: micro-1
+spec:
+  type: LoadBalancer
+  selector:
+    app: invetory
+    pod: micro-1-pod
+  ports:
+    - name: http
+      targetPort: 8080
+      port: 80

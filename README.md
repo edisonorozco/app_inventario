@@ -72,3 +72,27 @@ Al hacer esto se mostrará lo siguiente
 
 ![Texto alternativo](images/img_4.png)
 Y ya tenemos el proyecto en ambiente local con Java 19, Spring, Maven y Git.
+
+Para acceder a la documentación escriba en la barra de direcciones de su navegador
+**http://localhost:8080/swagger-ui/index.html** y se debe mostrar la siguiente ventana
+![Texto alternativo](images/img_5.png) si desea ver el YAML escriba en 
+la barra de dirección **http://localhost:8080/v3/api-docs** 
+
+## **Despliegue en Kubernetes**
+
+Para desplegar esta aplicación en kubernetes puede hacer uso de los archivos en el directorio
+k8s que se encuentra en este proyecto. Ejecute una consola de comando en este directorio 
+y utilice los comandos de ***"kubectl apply -f deployment.yaml"*** y  ***"kubectl apply -f service.yaml"***
+como se muestra a continuación.
+
+![Texto alternativo](images/img_6.png)
+![Texto alternativo](images/img_7.png)
+
+luego puede ejecutar el comando de ***"kubectl get all"*** para ver los pods 
+creados.
+![Texto alternativo](images/img_8.png)
+En este ejemplo se pueden 3 pods ya que el deployment se configuro para 
+desplegar 3 replicas.
+
+Tener en cuenta que ya se debe contar un un cluster y el cliente de k8s configurados
+en su local ya que este proceso no se explica en este proyecto por que es algo aparte.
